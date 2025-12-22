@@ -76,7 +76,7 @@ export const signIn = async (req, res) => {
       sameSite: "strict",
     });
 
-    return res.status(201).json(user);
+    return res.status(201).json({message:`user is login ${user}`});
   } catch (error) {
     return res.status(201).json({ message: `signin error ${error}` });
   }
