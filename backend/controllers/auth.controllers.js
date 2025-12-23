@@ -60,7 +60,7 @@ export const signIn = async (req, res) => {
     }
 
     //match entered password with hashed password
-    const isMatch = bcrypt.compare(password, user.password);
+    const isMatch = await bcrypt.compare(password, user.password); //bug solve login even without password
 
     if (!isMatch) {
       return res.status(400).json({ message: "incorrect password!" });
@@ -76,17 +76,17 @@ export const signIn = async (req, res) => {
       sameSite: "strict",
     });
 
-    return res.status(201).json({message:`user is login ${user}`});
+    return res.status(201).json({ message: `user is login ${user}` });
   } catch (error) {
     return res.status(201).json({ message: `signin error ${error}` });
   }
 };
 
-export const signOut = async (req,res) => {
+export const signOut = async (req, res) => {
   try {
-    res.clearCookie("token")
+    res.clearCookie("token");
     return res.status(200).json({ message: "logout successfully" });
   } catch (error) {
     return res.status(201).json({ message: `signout error ${error}` });
   }
-}
+};
