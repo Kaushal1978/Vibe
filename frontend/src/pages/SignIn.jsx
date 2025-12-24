@@ -11,11 +11,13 @@ function signIn() {
   const [showPassword, setShowPassword] = useState(false);
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
+  const [err, setErr] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handlesignIn = async () => {
     setLoading(true);
+    setErr("");
     try {
       const result = await axios.post(
         `${serverUrl}/api/auth/signin`,
@@ -25,6 +27,7 @@ function signIn() {
       console.log(result.data);
       setLoading(false);
     } catch (error) {
+      setErr(error.response?.data?.message);
       console.log(error);
       setLoading(false);
     }
@@ -90,7 +93,6 @@ function signIn() {
               />
             )}
 
-            
             <p className="mt-3 text-sm text-gray-800 flex items-center justify-center pr-1 cursor-pointer">
               Forgot Password?
               <span
@@ -101,6 +103,11 @@ function signIn() {
               </span>
             </p>
           </div>
+          {err && (
+            <p className="text-red-500 flex flex-col justify-center items-center ">
+              {err}
+            </p>
+          )}
 
           <div className="w-[280px] mt-[30px] mx-auto">
             <button

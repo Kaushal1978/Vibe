@@ -14,11 +14,13 @@ function SignUp() {
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [err, setErr] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handlesignUp = async () => {
     setLoading(true);
+    setErr("");
     try {
       const result = await axios.post(
         `${serverUrl}/api/auth/signup`,
@@ -28,6 +30,7 @@ function SignUp() {
       console.log(result.data);
       setLoading(false);
     } catch (error) {
+      setErr(error.response?.data?.message);
       console.log(error);
       setLoading(false);
     }
@@ -134,6 +137,12 @@ function SignUp() {
               />
             )}
           </div>
+
+          {err && (
+            <p className="text-red-500 flex flex-col justify-center items-center ">
+              {err}
+            </p>
+          )}
 
           {/* button */}
           <div className="w-[280px] mt-[30px] mx-auto">
