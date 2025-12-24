@@ -3,7 +3,7 @@ import logo2 from "../assets/logo2.png";
 import logo1 from "../assets/logo1.png";
 import { FaEye, FaEyeSlash, FaLess } from "react-icons/fa";
 import axios from "axios";
-import {ClipLoader} from "react-spinners"
+import { ClipLoader } from "react-spinners";
 import { serverUrl } from "../App";
 import { useNavigate } from "react-router-dom";
 
@@ -14,11 +14,11 @@ function SignUp() {
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loading,setLoading] = useState(false)
-  const navigate = useNavigate()
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handlesignUp = async () => {
-    setLoading(true)
+    setLoading(true);
     try {
       const result = await axios.post(
         `${serverUrl}/api/auth/signup`,
@@ -26,10 +26,10 @@ function SignUp() {
         { withCredentials: true }
       );
       console.log(result.data);
-      setLoading(false)
+      setLoading(false);
     } catch (error) {
       console.log(error);
-      setLoading(false)
+      setLoading(false);
     }
   };
 
@@ -43,6 +43,7 @@ function SignUp() {
             <img src={logo2} alt="Vibe logo" className="w-[70px]" />
           </div>
 
+          {/* Name */}
           <div className="relative w-[280px] mt-[40px] mx-auto">
             <label
               htmlFor="name"
@@ -62,6 +63,7 @@ function SignUp() {
             />
           </div>
 
+          {/* username */}
           <div className="relative w-[280px] mt-[40px] mx-auto">
             <label
               htmlFor="username"
@@ -81,6 +83,7 @@ function SignUp() {
             />
           </div>
 
+          {/* email */}
           <div className="relative w-[280px] mt-[40px] mx-auto">
             <label
               htmlFor="email"
@@ -100,6 +103,7 @@ function SignUp() {
             />
           </div>
 
+          {/* password */}
           <div className="relative w-[280px] mt-[40px] mx-auto">
             <label
               htmlFor="password"
@@ -131,13 +135,21 @@ function SignUp() {
             )}
           </div>
 
+          {/* button */}
           <div className="w-[280px] mt-[30px] mx-auto">
-            <button className="w-full h-[50px] bg-black text-white rounded-2xl cursor-pointer hover:bg-gray-800 transition" onClick={handlesignUp} disabled={loading} >
-             {loading?<ClipLoader size={30} color="white"/>:"Sign Up"} 
+            <button
+              className="w-full h-[50px] bg-black text-white rounded-2xl cursor-pointer hover:bg-gray-800 transition"
+              onClick={handlesignUp}
+              disabled={loading}
+            >
+              {loading ? <ClipLoader size={30} color="white" /> : "Sign Up"}
             </button>
             <p className="cursor-pointer text-gray-800 px-[15px]">
               Already Have An Account ?
-              <span className="border-b-2 border-b-black pb-[3px] text-black "  onClick={() => navigate("/signin")}>
+              <span
+                className="border-b-2 border-b-black pb-[3px] text-black "
+                onClick={() => navigate("/signin")}
+              >
                 Sign In
               </span>
             </p>

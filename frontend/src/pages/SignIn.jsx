@@ -70,24 +70,36 @@ function signIn() {
             <input
               type={showPassword ? "text" : "password"}
               id="password"
-              className="w-full h-[50px] px-4 rounded-2xl border-2 border-black outline-none bg-transparent text-black"
+              className="w-full h-[50px] px-4 pr-10 rounded-2xl border-2 border-black outline-none bg-transparent text-black"
               placeholder="Enter Password"
               required
               onChange={(e) => setPassword(e.target.value)}
               value={password}
             />
 
+            {/* 👁 Eye icon */}
             {!showPassword ? (
               <FaEye
-                className="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer"
+                className="absolute right-4 top-[25px] cursor-pointer"
                 onClick={() => setShowPassword(true)}
               />
             ) : (
               <FaEyeSlash
-                className="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer"
+                className="absolute right-4 top-[25px] cursor-pointer"
                 onClick={() => setShowPassword(false)}
               />
             )}
+
+            
+            <p className="mt-3 text-sm text-gray-800 flex items-center justify-center pr-1 cursor-pointer">
+              Forgot Password?
+              <span
+                className="ml-1 border-b-2 border-black pb-[2px] text-black"
+                onClick={() => navigate("/forgetpassword")}
+              >
+                Reset Password
+              </span>
+            </p>
           </div>
 
           <div className="w-[280px] mt-[30px] mx-auto">
